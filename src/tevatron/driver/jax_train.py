@@ -98,8 +98,8 @@ def main():
         tokenize = partial(tokenizer, return_attention_mask=False, return_token_type_ids=False, padding=False,
                            truncation=True)
         query = example['query']
-        pos_psgs = [p['title'] + " " + p['text'] for p in example['positive_passages']]
-        neg_psgs = [p['title'] + " " + p['text'] for p in example['negative_passages']]
+        pos_psgs = [p['text'] for p in example['positive_passages']]
+        neg_psgs = [p['text'] for p in example['negative_passages']]
 
         example['query_input_ids'] = dict(tokenize(query, max_length=32))
         example['pos_psgs_input_ids'] = [dict(tokenize(x, max_length=data_args.p_max_len)) for x in pos_psgs]

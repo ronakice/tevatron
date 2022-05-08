@@ -58,10 +58,8 @@ class SimpleTrainPreProcessor:
 
     def get_passage(self, p):
         entry = self.collection[int(p)]
-        title = entry[self.title_field]
-        title = "" if title is None else title
         body = entry[self.text_field]
-        content = title + self.tokenizer.sep_token + body
+        content = body
 
         passage_encoded = self.tokenizer.encode(
             content,
