@@ -84,7 +84,7 @@ class SimpleTrainPreProcessor:
 class SimpleCollectionPreProcessor:
     tokenizer: PreTrainedTokenizer
     separator: str = '\t'
-    max_length: int = 128
+    max_length: int = 512
 
     def process_line(self, line: str):
         xx = line.strip().split(self.separator)
