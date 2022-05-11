@@ -101,7 +101,7 @@ def main():
         pos_psgs = [p['text'] for p in example['positive_passages']]
         neg_psgs = [p['text'] for p in example['negative_passages']]
 
-        example['query_input_ids'] = dict(tokenize(query, max_length=32))
+        example['query_input_ids'] = dict(tokenize(query, max_length=data_args.q_max_len))
         example['pos_psgs_input_ids'] = [dict(tokenize(x, max_length=data_args.p_max_len)) for x in pos_psgs]
         example['neg_psgs_input_ids'] = [dict(tokenize(x, max_length=data_args.p_max_len)) for x in neg_psgs]
 
@@ -144,7 +144,7 @@ def main():
         def get_batch(self, indices, epoch):
             qq, dd = zip(*[self.get_example(i, epoch) for i in map(int, indices)])
             dd = sum(dd, [])
-            return dict(tokenizer.pad(qq, max_length=32, padding='max_length', return_tensors='np')), dict(
+            return dict(tokenizer.pad(qq, max_length=data_args.q_max_len, padding='max_length', return_tensors='np')), dict(
                 tokenizer.pad(dd, max_length=data_args.p_max_len, padding='max_length', return_tensors='np'))
 
     train_dataset = TrainDataset(train_data, data_args.train_n_passages, tokenizer)
