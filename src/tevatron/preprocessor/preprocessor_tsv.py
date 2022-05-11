@@ -11,9 +11,8 @@ class SimpleTrainPreProcessor:
     collection_file: str
     tokenizer: PreTrainedTokenizer
 
-    max_length: int = 128
-    columns = ['text_id', 'title', 'text']
-    title_field = 'title'
+    max_length: int = 512
+    columns = ['text_id', 'text']
     text_field = 'text'
 
     def __post_init__(self):
